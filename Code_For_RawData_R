@@ -1,0 +1,86 @@
+### Loading file in R
+ data1<- read.csv(file.choose(), header=T, sep=“,”)
+
+### Importing Data in R
+
+> View(data1)
+> attach(data1)
+
+
+### Descriptive analysis
+### Summary statistics for each numerical variable:
+
+###Ventilator days: (Numerical)
+> summary(ventilatordays)
+   Min.   1st Qu.   Median     Mean     3rd Qu.     Max.
+   0.00     63.75    117.00      139.10   185.00     2441.00
+ 
+> mean(ventilatordays)
+[1] 139.135
+ 
+> median(ventilatordays)
+[1] 117
+ 
+> sd(ventilatordays)
+[1] 126.3505
+ 
+> mode(ventilatordays)
+[1] "numeric"
+ 
+ 
+###VAC  (Ventilator Associated Condition)
+ 
+> Summary(ofvacevents)
+Min.    1st Qu.    Median    Mean   3rd Qu.   Max
+  0        0         0      0.6278      1          20
+ 
+> mean(ofvacevents)
+[1] 0.6278079
+ 
+> median(ofvacevents)
+[1] 0
+ 
+> sd(ofvacevents)
+[1] 1.218891
+ 
+> mode(ofvacevents)
+[1] "numeric"
+ 
+
+###IVAC (Infection Ventilator Associated Complication)
+ 
+> summary(ofivacevents)
+   Min.    1st Qu.    Median    Mean     3rd Qu.    Max.
+ 0.0000  0.0000    0.0000      0.2314   0.0000     10.0000
+ 
+ 
+> mean(ofivacevents)
+[1] 0.2314098
+ 
+> median(ofivacevents)
+[1] 0
+ 
+> sd(ofivacevents)
+[1] 0.6108429
+ 
+> mode(ofivacevents)
+[1] "numeric"
+ 
+ 
+###VAP (Ventilator Associated Pneumonia)
+ 
+> summary(ofpvapevents)
+   Min.    1st Qu.    Median    Mean     3rd Qu.       Max.
+ 0.0000   0.0000   0.0000      0.1278   0.0000       22.0000
+ 
+> mean(ofpvapevents)
+[1] 0.1278079
+ 
+> median(ofpvapevents)
+[1] 0
+ 
+> sd(ofpvapevents)
+[1] 0.5165566
+ 
+> mode(ofpvapevents)
+[1] "numeric"
