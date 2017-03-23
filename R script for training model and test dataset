@@ -1,0 +1,236 @@
+hdata <- read.csv(file.choose(), header=T, sep=",")
+names(hdata)
+attach(hdata)
+ 
+>sample(4863,2918)
+
+### This command will select 2918 rows or observations randomly out of 4863 observations.
+ 
+>indices<-sample(4863,2918)
+
+### This command will fetch all the records present in these 2918 rows.
+ 
+>indices
+ 
+>hdata[indices,]
+
+### This will give us all the records present in indices.
+ 
+>train<-hdata[indices,]
+
+### This command will insert all the records from the previous query, into a new variable “train”.
+ 
+>train
+
+### This will give us all the records present in indices.
+ 
+>test<-hdata[-indices,]
+
+### This command will fetch all the records present in the dataset but 2918 rows.
+ 
+>test
+
+### This will give us all the records but 2918 rows.
+ 
+>attach(train)
+### This will extract the train data of 2918 records.
+ 
+ 
+>m1<- lm(VAE ~ SizeOfHospital + Community + Type.of.Unit )
+###  In this command we are regressing VAE on all of the predictor variable (SizeOfHospital,Community,Type.of.Unit)
+ 
+ 
+>m1
+### This command will give us the result of regression
+ 
+>summary(m1)
+### This command will give us the summary of the result, i.e. residuals, estimated standard error, p-value, and t-value.
+
+> plot (m1)
+ 
+OR 
+ 
+The summary function outputs the regression coefficients for all the predictors.
+ 
+>test$VAE
+### This command works like the attach command, but instead of extracting records from all the variables, it will fetch only VAE records from test data.
+ 
+ 
+>t2 <- test[,c("SizeOfHospital", "Community", "Type.of.Unit")]
+### This command will remove all the VAE entries from the test dataset.
+ 
+R script for predictive analysis
+ 
+>predict(m1, t2)
+### The predict() function can be used to produce confidence intervals and prediction intervals for the prediction of VAE for a given value of all the predictor variables.
+ 
+ 
+>p2 <- predict(m1, t2)
+### We are assigning a new variable p2.
+ 
+>summary(p2)
+### This command will give us the summary of the result, i.e. residuals, estimated standard error, p-value, and t-value.
+ 
+OR
+  
+###The summary function outputs the regression coefficients for all the predictors.
+ 
+>str(p2)
+### This command will give the structure of p2.
+ 
+>as.matrix(p2)
+### This command will arrange the output side by side, instead of one below the other.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#################################DELIVERABLE 4 #############################
+### R code for entire data set as training data
+
+library(ISLR)
+## Loads Library ISLR
+
+data1 <- read.csv(file.choose(), header=T, sep=",")
+##This command will read data into dataframe data1.
+
+names(data1)
+##This command displays all column names
+
+summary(data1)
+##This will provide summary of data frame data1.
+
+## As our variales are qualitative , we will convert them into quantitative.
+
+attach(hdata)
+
+is.factor(data1$SizeOfHospital)
+## This command will check whether the given variable "Size of Hospital " is factor or not .
+
+data1$SizeOfHospital=as.numeric(data1$SizeOfHospital)
+## This will change the predictor variable Size of Hospital to numeric.
+
+is.numeric(data1$SizeOfHospital)
+## This will check whetehr the given variable is numeric or not .
+
+is.factor(data1$Community)
+## This will check whether Community is factor or not.
+
+data1$Community=as.numeric((data1$Community))
+##This will convert Community to numeric.
+
+is.numeric(data1$Community)
+##This will check whether Comunity is numeric or not.
+
+is.factor(data1$Type.of.Unit)
+##This will check whther "Type of Unit " is factor or not.
+
+data1$Type.of.Unit=as.numeric(data1$Type.of.Unit)
+## This wil convert "Type of Unit" to NUmeric.
+
+is.numeric(data1$Type.of.Unit)
+##This will check whether "Type of Unit" is numeric or not, IF numeric will give value as "TRUE".
+
+is.numeric(data1$VAE)
+##This will check whether VAE is numeric or not.
+
+summary(data1)
+##Summary of data frame data1.
+head(data1)
+##This will display first few records in the data frame.
+
+tail(data1)
+## This will display last records in the dataset.
+
+set.seed(1)
+
+train=sample(4864,1000)
+##This will create training set of 1000 records.
+
+lm.fit=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,1),data=data1)
+##This command is for regressing VAE on all 3 predictor variables with polynomial degree of 1.
+
+mean((VAE-predict(lm.fit,data1))[-train]^2)
+##This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset.
+
+lm.fit2=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,2),data=data1)
+##This command is for regressing VAE on all 3 predictor variables with polynomial degree of 2.
+
+mean((VAE-predict(lm.fit2,data1))[-train]^2)
+##This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 1.
+
+lm.fit3=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,3),data=data1)
+##This command is for regressing VAE on all 3 predictor variables with polynomial degree of 3.
+
+mean((VAE-predict(lm.fit3,data1))[-train]^2)
+##This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for poynomial degree of 3.
+
+lm.fit4=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,4),data=data1)
+##This command is for regressing VAE on all 3 predictor variables with polynomial degree of 4.
+
+mean((VAE-predict(lm.fit4,data1))[-train]^2)
+##This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for poynomial degree of 4.
+
+lm.fit5=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,5),data=data1)
+##This command is for regressing VAE on all 3 predictor variables with polynomial degree of 5.
+
+mean((VAE-predict(lm.fit5,data1))[-train]^2)
+##This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for poynomial degree of 5.
+
+lm.fit6=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,6),data=data1)
+##This command is for regressing VAE on all 3 predictor variables with polynomial degree of 6.
+
+mean((VAE-predict(lm.fit6,data1))[-train]^2)
+##This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 6.
+
+lm.fit7=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,7),data=data1)
+##This command is for regressing VAE on all 3 predictor variables with polynomial degree of 7.
+
+mean((VAE-predict(lm.fit7,data1))[-train]^2)
+##This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for degree of polynomial of 7.
+
+lm.fit8=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,8),data=data1)
+##This command is for regressing VAE on all 3 predictor variables with polynomial degree of 8.
+
+mean((VAE-predict(lm.fit8,data1))[-train]^2)
+#3This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 8.
+
+lm.fit9=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,9),data=data1)
+##This command is for regressing VAE on all 3 predictor variables with polynomial degree of 9.
+
+mean((VAE-predict(lm.fit9,data1))[-train]^2)
+## This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 9.
+ 
+lm.fit10=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,10),data=data1)
+##This command is for regressing VAE on all 3 predictor variables with polynomial degree of 10.
+
+mean((VAE-predict(lm.fit10,data1))[-train]^2)
+##This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree fo 10.
+
+
+x<-c(1,2,3,4,5,6,7,8,9,10)
+##This will set values to variable x.
+
+y<-c(4.958051e-05,4.943545e-05,4.931851e-05,4.96085E-05,4.95694E-05,4.95636E-05,4.95534E-05,4.95172E-05,4.94797E-05,4.90489E-05)
+##This will set values to variable y.
+
+plot(x,y,xlab = "Degree of Polynomial",ylab = "MSE",main="plot",type="b")
+##This will plot above values on X and Y axis .
+
