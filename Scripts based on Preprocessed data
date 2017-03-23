@@ -1,0 +1,56 @@
+Data Modeling:
+Categorization of Qualitative Predictors in R:
+### Read in VAE data, and attach file , check names.
+> hdata<- read.csv(file.choose(), header=T, sep=",")
+> attach(hdata)
+> names(data1)
+  ### Category levels of qualitative predictors(Size of Hospital, Community & type of unit):
+> levels(hdata$SizeOfHospital)
+> levels(hdata$Community)
+> levels(hdata$Type.of.Unit)
+###Summary of the entire data set to see the distribution of values.
+> summary(hdata)
+ 
+R script for Boxplots for each predictor variable against VAE incidence rate.
+####Boxplot between VAE and Size of Hospital to understand the distribution of VAE rate in each of the variable levels:
+>  boxplot(data1$VAE ~ data1$SizeOfHospital, main = "Boxplot VAE Vs Size Of Hospital",ylab = "VAE", col = c("yellow","lightblue","red"), cex = 0.35, las = 1, ylim = c(0,0.03))
+###Boxplot between VAE and Community to understand the distribution of VAE rate in each of the variable levels:
+> boxplot(data1$VAE ~ data1$Community, main = "Boxplot VAE Vs Size Of Hospital",ylab = "VAE",xlab = "Community", col = c("yellow","lightblue","red"), cex = 0.35, las = 1, ylim = c(0,0.03))
+###Boxplot between VAE and Type of Unit to understand the distribution of VAE rate in each of the variable levels:
+> boxplot(data1$VAE ~ data1$Type.of.Unit, main = "Boxplot VAE Vs TypeOfUnit",ylab = "VAE",xlab = "TypeOfUnit", col = c("yellow","lightblue","red"), cex = 0.35, las = 1, ylim = c(0,0.03))
+ 
+ 
+ 
+Hdata <- read.csv(file.choose(), header=T, sep=",")
+ 
+R script for removing outliers
+ 
+>names(Hdata)
+### This command will give us the names of all attributes in our table.
+ 
+>attach(Hdata)
+ 
+>quantile(VAE,0.25)
+### This command will calculate the first quartile, i.e. Q1
+ 
+>quantile(VAE,0.75)
+### This command will calculate the third quartile, i.e. Q3
+ 
+>quantile(VAE,0.5)
+### This command will calculate the second quartile, i.e. Q2
+ 
+R script for chi-square
+ 
+Chi-Square for Size of Hospital and Community
+ 
+>table(SizeOfHospital, Community)
+
+### This command will give the summary of number of small, medium, and large hospital in different locations.
+ 
+>t1 <- table( SizeOfHospital, Community)
+### We are assigning a new variable “t1” to the above query.
+ 
+>chisq.test(t1, correct = T)
+
+### This command will perform the chi-square test between size of hospital and community.
+ 
