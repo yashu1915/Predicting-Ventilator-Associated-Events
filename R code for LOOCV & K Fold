@@ -1,0 +1,43 @@
+hdata <- read.csv(file.choose(), header=T, sep=",")
+hdata
+
+### Split training and testing data
+sample(4863,2918)
+indices <- sample(4863,2918)
+indices
+hdata[indices,]
+train <- hdata[indices,]
+train
+test <- hdata[-indices,]
+test
+
+### Convert Categorial variables to numerical variables
+library(ISLR)
+set.seed=(1)
+hdata$SizeOfHospital=as.numeric(hdata$SizeOfHospital)
+is.numeric(hdata$SizeOfHospital)
+
+hdata$Community =as.numeric(hdata$Community)
+is.numeric(hdata$Community)
+
+hdata$Type.of.Unit=as.numeric(hdata$Type.of.Unit)
+is.numeric(hdata$Type.of.Unit)
+
+glm.fit=glm(VAE~SizeOfHospital+Community+Type.of.Unit ,data=hdata)
+coef(glm.fit)
+
+library (boot)
+glm.fit=glm(VAE~SizeOfHospital+Community+Type.of.Unit,data=hdata)
+cv.err =cv.glm(hdata ,glm.fit)
+cv.err$delta
+
+### Loocv 1-5
+cv.error=rep (0,5)
+for (i in 1:5){
+glm.fit=glm(VAE~poly(SizeOfHospital+Community+Type.of.Unit ,i),data=hdata)
+cv.error[i]=cv.err$delta [1]
+}
+cv.error
+
+### Plot order of ploynomial VS error rate for LOOCV
+plot(i,cv.error, type = "b")
