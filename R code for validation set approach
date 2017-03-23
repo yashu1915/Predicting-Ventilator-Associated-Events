@@ -1,0 +1,115 @@
+>hdata <- read.csv(file.choose(), header=T, sep=",")
+### This command will load the dataset in R.
+
+>attach(hdata)
+
+>hdata$SizeOfHospital=as.numeric(hdata$SizeOfHospital)
+### This command will convert the factorial variable into numeric variable.
+
+>is.numeric(hdata$SizeOfHospital)
+### This command will check whether the variable “SizeOfHospital” changed to numeric variable.
+
+>hdata$Community=as.numeric(Community)
+### This command will convert the factorial variable into numeric variable.
+
+>is.numeric(hdata$Community)
+### This command will check whether the variable “Community” changed to numeric variable
+
+>hdata$Type.of.Unit=as.numeric(hdata$Type.of.Unit)
+### This command will convert the factorial variable into numeric variable.
+
+>is.numeric(hdata$Type.of.Unit)
+### This command will check whether the variable “Type.of.Unit” changed to numeric variable
+
+>library(ISLR)
+>set.seed=(1)
+
+>train=sample(4863,2918)
+### This command will create a training set consisting of 2918 records.
+
+>lm.fit=lm(VAE~SizeOfHospital+Community+Type.of.Unit, data=hdata, subset=train)
+### This command is for regressing VAE on all 3 predictor variables.
+
+>mean((VAE-predict(lm.fit,hdata))[-train]^2)
+### This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset.
+
+>lm.fit1=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,1), data=hdata, subset=train)
+### This command is the same, but with polynomial degree=1.
+
+>mean((VAE-predict(lm.fit1,hdata))[-train]^2)
+### This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 1.
+
+>lm.fit2=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,2), data=hdata, subset=train)
+### This command is the same, but with polynomial degree=2.
+
+>mean((VAE-predict(lm.fit2,hdata))[-train]^2)
+### This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 2.
+
+
+>lm.fit3=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,3), data=hdata, subset=train)
+### This command is the same, but with polynomial degree=3.
+
+>mean((VAE-predict(lm.fit3,hdata))[-train]^2)
+### This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 3.
+
+
+>lm.fit4=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,4), data=hdata, subset=train)
+### This command is the same, but with polynomial degree=4.
+
+>mean((VAE-predict(lm.fit4,hdata))[-train]^2)
+### This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 4.
+
+
+>lm.fit5=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,5), data=hdata, subset=train)
+### This command is the same, but with polynomial degree=5.
+
+>mean((VAE-predict(lm.fit5,hdata))[-train]^2)
+### This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 5.
+
+
+>lm.fit6=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,6), data=hdata, subset=train)
+### This command is the same, but with polynomial degree=6.
+
+>mean((VAE-predict(lm.fit6,hdata))[-train]^2)
+### This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 6.
+
+
+>lm.fit7=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,7), data=hdata, subset=train)
+### This command is the same, but with polynomial degree=7.
+
+>mean((VAE-predict(lm.fit7,hdata))[-train]^2)
+### This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 7.
+
+
+>lm.fit8=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,8), data=hdata, subset=train)
+### This command is the same, but with polynomial degree=8.
+
+>mean((VAE-predict(lm.fit8,hdata))[-train]^2)
+### This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 8.
+
+
+>lm.fit9=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,9), data=hdata, subset=train)
+### This command is the same, but with polynomial degree=9.
+
+>mean((VAE-predict(lm.fit9,hdata))[-train]^2)
+### This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 9.
+
+
+>lm.fit10=lm(VAE~poly(SizeOfHospital+Community+Type.of.Unit,10), data=hdata, subset=train)
+### This command is the same, but with polynomial degree=10.
+
+>mean((VAE-predict(lm.fit10,hdata))[-train]^2)
+### This command will predict the mean VAE for the test data, i.e. remaining half of the records of the dataset for polynomial degree of 10.
+
+>x<-c(1,2,3,4,5,6,7,8,9,10)
+### This command is for storing the variables into X.
+
+>x
+
+>y<c(0.0341,0.034067,0.034039,0.034029,0.034009,0.034007,0.034005,0.034005,0.034004,0.0338)
+### This command is for storing the variables into Y.
+
+>y
+
+>plot(x,y,xlab="Degree of Polynomial",ylab="Mean Square Error",main="Plot",type="b",col=2)
+### This command will plot a graph between “Degree of Polynomial” and “MSE”.s
