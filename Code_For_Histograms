@@ -1,0 +1,132 @@
+### Loading file in R
+ data1 <- read.csv(file.choose(), header=T, sep=“,”)
+ 
+###Barplot for Qualitative variables
+###Barplot for Community (Location setting:Rural/Urban)
+
+> table(data1$howwouldyoudescribeyourcomm)
+
+OR
+
+> attach(data1)
+
+###This wil extract the variable “howwouldyoudescribeyourcomm” from the table, so that R can recognise the object.
+
+> table(howwouldyoudescribeyourcomm)
+
+###will count all hospitals in different location setting.
+
+> count <- table(howwouldyoudescribeyourcomm)
+
+###Assigning variable “count” to above query
+
+> count
+
+> table(data1$howwouldyoudescribeyourcomm)/5164
+
+###Computing percentage, i.e. dividing by total number of records
+
+> percent <-table(data1$howwouldyoudescribeyourcomm)/5164
+
+###Assigning variable “percent” to above query
+
+> barplot(count)
+
+> barplot(percent)
+
+> barplot(percent,main="Barplot for location setting",xlab="Location setting", ylab="%",las=1,col=cols,ylim=c(0,0.5))
+
+
+____________________________________________________________________________
+###Barplot for Qualitative variables : Size of Hospital
+
+> table(data1$whatisthesizeofyourhospita) 
+
+
+###This wil extract the variable “whatisthesizeofyourhospita” from the table, so that R can recognise the object.
+
+> table(whatisthesizeofyourhospita)
+
+###This will count all hospitals according to their size.
+
+> count <- table(whatisthesizeofyourhospita)
+
+> count
+
+> table (data1$whatisthesizeofyourhospita)/5164
+
+> barplot(count)
+
+> barplot(percent)
+
+>barplot(percent,main="Barplot for size of hospital",xlab="Size of Hospital", ylab="%",las=1,ylim=c(0,0.7), col=cols)
+___________________________________________________________________________
+###Barplot for Unit type
+
+> table(data1$whattypeofunitdoyouworkin) 
+
+> table(whattypeofunitdoyouworkin)
+
+> countunit<- (whattypeofunitdoyouworkin)
+
+> count unit
+
+> table (data1$whattypeofunitdoyouworkin)/5164
+
+> unitpercent<-table (data1$whattypeofunitdoyouworkin)/5164
+
+> barplot(countunit)
+
+> barplot(unitpercent)
+
+> barplot(unitpercent,main="Barplot for Unit type",xlab="Type of unit", ylab="%",col.main=5, col.lab=2,col.axis=3, las=2,col=cols)
+____________________________________________________________________________
+
+###Histogram for Ventilator days.
+
+> table(ventilatordays)
+
+###This will count number of ventilator days for all records.
+
+> hist(ventilatordays)
+
+###This will plot a histogram for frequency of number of ventilator days.
+
+> hist(ventilatordays, freq=F)
+
+### This will set the frequency as false, and instead of frequency, density will appear.
+
+> hist(ventilatordays, prob=T)
+> hist(ventilatordays,prob=T,breaks=c(0,200,400,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2600))
+
+> hist(ventilatordays,prob=T, ylim=c(0,0.005),breaks=seq(from=0, to=2500, by=100), main="Box plot of ventilator days", xlab="Ventilator days", las=1)
+ 
+> lines(density(ventilatordays))
+
+> hist(ventilatordays,ylim=c(0,0.2),breaks=seq(from=0, to=2500, by=100), main="Box plot of ventilator days", xlab="Ventilator days", las=1)
+
+###Histogram for Infection related to ventilator associated conditions
+
+> table(ofvacevents)
+> hist(ofvacevents)
+
+> hist(ventilatordays, prob=T)
+
+> hist(ofvacevents, prob=T,ylim=c(0,0.5),breaks=seq(from=0,to=20,by=2),main="Histogram for ventilator associated condition",xlab="VAC events",las=1, col=3)
+###Histogram for Infection related to ventilator associated complication
+
+> table(ofivacevents)
+> hist(ofivacevents)
+
+> hist(ofivacevents, prob=T)
+> hist(ofivacevents, prob=T,ylim=c(0,1),breaks=seq(from=0,to=10,by=1),main="Histogram forVentilator Associated Complication",xlab="iVAC events",las=1,col=5,cex.main=0.7)
+
+
+###Histogram for Infection related to ventilator associated pneumonia
+
+> table(ofpvapevents)
+> hist(ofpvapevents)
+
+> hist(ofivacevents, prob=T)
+
+> hist(ofivacevents, prob=T,ylim=c(0,0.6),breaks=seq(from=0,to=24,by=2),main="Ventilator Associated Pneumonia",xlab=“pvap events",las=1, col=2)
