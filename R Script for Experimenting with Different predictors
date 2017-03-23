@@ -1,0 +1,67 @@
+>hdata <- read.csv(file.choose(), header=T, sep=",")
+>sample(4863,2918)
+### This command will select 2918 rows or observations randomly out of 4863 observations.
+>indices<-sample(4863,2918)
+### This command will fetch all the records present in these 2918 rows.
+>indices
+>hdata[indices,]
+### This will give us all the records present in indices.
+>train<-hdata[indices,]
+### This command will insert all the records from the previous query, into a new variable “train”.
+ 
+>train
+### This will give us all the records present in indices.
+>test<-hdata[-indices,]
+### This command will fetch all the records present in the dataset but 2918 rows.
+>test
+### This will give us all the records but 2918 rows.
+>attach(train)
+### This will extract the train data of 2918 records.
+>m1<-lm(VAE ~ SizeOfHospital + Community)
+###  In this command we are regressing VAE  for size of hospital and community of the predictor variable (SizeOfHospital,Community)
+>m1
+>summary(m1)
+>test$VAE
+>t2<- test[,c("SizeOfHospital", "Community")]
+>predict(m1,t2)
+>p2 <- predict(m1,t2)
+>p2
+>summary(p2)
+ 
+ 
+>hdata <- read.csv(file.choose(), header=T, sep=",")
+>sample(4863,2918)
+### This command will select 2918 rows or observations randomly out of 4863 observations.
+>indices<-sample(4863,2918)
+### This command will fetch all the records present in these 2918 rows.
+>indices
+>hdata[indices,]
+### This will give us all the records present in indices.
+>train<-hdata[indices,]
+### This command will insert all the records from the previous query, into a new variable “train”.
+>train
+### This will give us all the records present in indices.
+>test<-hdata[-indices,]
+### This command will fetch all the records present in the dataset but 2918 rows.
+>test
+### This will give us all the records but 2918 rows.
+>attach(train)
+### This will extract the train data of 2918 records.
+>m3<-lm(VAE ~ Community + Type.of.Unit )
+###  In this command we are regressing VAEfor the combination of the predictor variable (Community,Type.of.Unit)
+>m3
+### This command will give us the result of regression
+>summary(m3)
+##This command will give us the summary of the result, i.e. residuals, estimated standard error, p-value, and t-value.
+>test$VAE
+### This command works like the attach command, but instead of extracting records from all the variables, it will fetch only VAE records from test data.
+>t4<- test[,c("Community", "Type.of.Unit")]
+### This command will remove all the VAE entries from the test dataset.
+>predict(m3,t4)
+### The predict() function can be used to produce confidence intervals and prediction intervals for the prediction of VAE for a given value of all the predictor variables.
+>p4 <- predict(m3,t4)
+### we are assigning new variable p4
+>p4
+>summary(p4)
+### This command will give us the summary of the result, i.e. residuals, estimated standard error, p-value, and t-value.
+ 
