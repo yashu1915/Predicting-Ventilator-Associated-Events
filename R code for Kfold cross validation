@@ -1,0 +1,57 @@
+#set.seed (17)
+#cv.error.10= rep (0 ,10)
+#for (i in 1:10) {
+#glm.fit=glm(VAE~poly(SizeOfHospital+Community+Type.of.Unit ,i),data=hdata)
+#cv.error.10[i]=cv.glm (hdata ,glm.fit ,K=10) $delta [1]
+#}
+#cv.error.10
+
+### Plot order of ploynomial VS error rate for K fold
+plot(i,cv.error.10, type = "b")
+
+### Bootstrapping Code
+###a function, alpha.fn(), which takes as input the (X, Y) data as well as a vector indicating which observations should be used to estimate α.
+
+alpha.fn=function (data ,index){
+X=data$X [index]
+Y=data$Y [index]
+return ((var(Y)-cov (X,Y))/(var(X)+var(Y) -2* cov(X,Y)))
+}
+
+
+###boot.fn(), which takes in the hdata data set as well as a set of indices for the observations, and returns the intercept and slope estimates for the linear regression model.
+
+
+> boot.fn=function (hdata,index )
++ return (coef(lm(hdata$VAE~hdata$SizeOfHospital+hdata$Type.of.Unit+hdata$Community,data=hdata ,subset =index)))
+> boot.fn(hdata ,1:4863)
+        
+
+###The boot.fn()  function can also be used in order to create bootstrap estimates for the intercept and slope terms by randomly sampling from among the observations with replacement. Here we give two examples.
+
+set.seed (1)
+> boot.fn(hdata ,sample (4863 ,4863 , replace =T))
+         
+###We next use the boot()  function to compute the standard errors of 1,000 bootstrap estimates for the intercept and slope terms.
+
+> Result1 <- boot(hdata ,boot.fn ,1000)
+> plot(Result1)
+
+###Standard formulas can be used to compute the standard errors for the regression coefficients in a linear model. These can be obtained using the summary()  function.
+
+> Result2 <- summary (lm(hdata$VAE~hdata$SizeOfHospital+hdata$Community+hdata$Type.of.Unit ,data=hdata))$coef
+
+> plot(Result2)
+
+###Below we compute the bootstrap standard error estimates and the standard linear regression estimates that result from fitting the quadratic model to the data.
+
+> boot.fn=function (data ,index )
++ coefficients(lm(hdata$VAE~hdata$SizeOfHospital+hdata$Community+hdata$Type.of.Unit  +(hdata$SizeOfHospital+hdata$Community+hdata$Type.of.Unit ^2) ,data=hdata ,
++ subset =index))
+> set.seed (1)
+Result3 <- boot(hdata ,boot.fn ,1000)
+>plot (Result3)
+
+>Result4 <- summary(lm(hdata$VAE~hdata$SizeOfHospital+hdata$Community+hdata$Type.of.Unit +I(hdata$SizeOfHospital+hdata$Community+hdata$Type.of.Unit)^2,data=hdata))$coef
+
+plot(Result4)
