@@ -39,18 +39,3 @@ R script for removing outliers
 >quantile(VAE,0.5)
 ### This command will calculate the second quartile, i.e. Q2
  
-R script for chi-square
- 
-Chi-Square for Size of Hospital and Community
- 
->table(SizeOfHospital, Community)
-
-### This command will give the summary of number of small, medium, and large hospital in different locations.
- 
->t1 <- table( SizeOfHospital, Community)
-### We are assigning a new variable “t1” to the above query.
- 
->chisq.test(t1, correct = T)
-
-### This command will perform the chi-square test between size of hospital and community.
- 
