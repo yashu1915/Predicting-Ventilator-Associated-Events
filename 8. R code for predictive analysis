@@ -1,0 +1,24 @@
+R script for predictive analysis
+ 
+>predict(m1, t2)
+### The predict() function can be used to produce confidence intervals and prediction intervals for the prediction of VAE for a given value of all the predictor variables.
+ 
+ 
+>p2 <- predict(m1, t2)
+### We are assigning a new variable p2.
+ 
+>summary(p2)
+### This command will give us the summary of the result, i.e. residuals, estimated standard error, p-value, and t-value.
+ 
+OR
+  
+###The summary function outputs the regression coefficients for all the predictors.
+ 
+>str(p2)
+### This command will give the structure of p2.
+ 
+>as.matrix(p2)
+### This command will arrange the output side by side, instead of one below the other.
+ 
+
+
