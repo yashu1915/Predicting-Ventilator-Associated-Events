@@ -1,0 +1,42 @@
+Chi-Square for Size of Hospital and Community
+ 
+>table(SizeOfHospital, Community)
+
+### This command will give the summary of number of small, medium, and large hospital in different locations.
+ 
+>t1 <- table( SizeOfHospital, Community)
+### We are assigning a new variable “t1” to the above query.
+ 
+>chisq.test(t1, correct = T)
+
+### This command will perform the chi-square test between size of hospital and community.
+ 
+Chi-Square test for Community and Type of unit
+ 
+ 
+>table(Community,Type.of.Unit)
+
+### This command will give the summary of number of different types of unit in different location.
+ 
+ 
+>t2<-table(Community,Type.of.Unit)
+
+### We are assigning a new variable “t2” to the above query.
+ 
+>chisq.test(t2, correct = T)
+
+### This command will perform the chi-square test between community and type of unit.
+ 
+Chi-Square test for Type of unit and community
+ 
+>table(Type.of.Unit, SizeOfHospital)
+
+### This command will give the summary for number of units in different sizes of hospital.
+ 
+>t3<-table(Type.of.Unit, SizeOfHospital)
+
+### We are assigning a new variable “t3” to the above query. 
+ 
+>chisq.test(t3, correct = T)
+
+### This command will perform the chi-square between type of unit and size of hospital.
